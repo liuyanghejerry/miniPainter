@@ -2,8 +2,8 @@
 #include <QPainter>
 #include <QDebug>
 
-MaskBased::MaskBased(QObject *parent) :
-    BasicBrush(parent)
+MaskBased::MaskBased() :
+    BasicBrush()
 {
 }
 

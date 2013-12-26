@@ -10,8 +10,8 @@
 
 //qreal myEasingFunction(qreal progress);
 
-BasicBrush::BasicBrush(QObject *parent) :
-    AbstractBrush(parent),
+BasicBrush::BasicBrush() :
+    AbstractBrush(),
     left_(0)
 {
 //    makeStencil(color_);

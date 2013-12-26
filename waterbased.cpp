@@ -7,8 +7,8 @@
 #include <QBitmap>
 #include <QDebug>
 
-WaterBased::WaterBased(QObject *parent):
-    BasicBrush(parent),
+WaterBased::WaterBased():
+    BasicBrush(),
     water_(50),
     extend_(50),
     mixin_(20),

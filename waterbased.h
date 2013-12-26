@@ -13,7 +13,7 @@ public:
     const static int EXTEND_MIN = 0;
     const static int MIXIN_MAX = 100;
     const static int MIXIN_MIN = 0;
-    explicit WaterBased(QObject *parent = 0);
+    explicit WaterBased();
     int water() const;
     void setWater(int water);
     int extend() const;

@@ -1,16 +1,22 @@
 #include "abstractbrush.h"
 #include <QDebug>
 
-AbstractBrush::AbstractBrush(QObject *parent) :
-    QObject(parent),
+AbstractBrush::AbstractBrush():
     width_(10),
     thickness_(THICKNESS_MAX),
     color_(Qt::black),
     surface_(nullptr)
 {
     typedef BrushFeature BF;
-    features_.set(BF::WIDTH);
-    features_.set(BF::COLOR);
+    BF::FeatureBits bits;
+    bits.set(BF::WIDTH);
+    bits.set(BF::COLOR);
+    features_ = bits;
+}
+
+AbstractBrush::~AbstractBrush()
+{
+    //
 }
 
 int AbstractBrush::width() const
@@ -43,6 +49,7 @@ void AbstractBrush::setSurface(Surface surface)
 {
     surface_ = surface;
 }
+
 BrushSettings AbstractBrush::settings() const
 {
     return settings_;

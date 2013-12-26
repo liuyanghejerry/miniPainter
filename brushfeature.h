@@ -18,7 +18,7 @@ public:
 
     typedef std::bitset<FEATURE_COUNT> FeatureBits;
 
-    BrushFeature(const FeatureBits& features)
+    BrushFeature(const FeatureBits& features = FeatureBits())
     {
         features_ = features;
     }

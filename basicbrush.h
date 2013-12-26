@@ -6,9 +6,8 @@
 
 class BasicBrush : public AbstractBrush
 {
-    Q_OBJECT
 public:
-    explicit BasicBrush(QObject *parent = 0);
+    explicit BasicBrush();
     void setWidth(int width) Q_DECL_OVERRIDE;
     void setColor(const QColor &color) Q_DECL_OVERRIDE;
     void setThickness(int thickness) Q_DECL_OVERRIDE;

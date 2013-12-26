@@ -5,9 +5,8 @@
 
 class BinaryBrush : public BasicBrush
 {
-    Q_OBJECT
 public:
-    explicit BinaryBrush(QObject *parent = 0);
+    explicit BinaryBrush();
 
 signals:
 

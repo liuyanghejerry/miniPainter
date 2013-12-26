@@ -4,8 +4,8 @@
 #include <QBrush>
 #include <QPainter>
 
-BinaryBrush::BinaryBrush(QObject *parent) :
-    BasicBrush(parent)
+BinaryBrush::BinaryBrush() :
+    BasicBrush()
 {
 }
 

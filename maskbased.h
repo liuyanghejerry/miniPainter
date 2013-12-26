@@ -5,9 +5,8 @@
 
 class MaskBased : public BasicBrush
 {
-    Q_OBJECT
 public:
-    explicit MaskBased(QObject *parent = 0);
+    explicit MaskBased();
 
     QImage mask() const;
     void setMask(const QImage &mask);

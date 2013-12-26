@@ -12,9 +12,8 @@
 #include "brushsettings.h"
 typedef QSharedPointer<QImage> Surface;
 
-class AbstractBrush : public QObject
+class AbstractBrush
 {
-    Q_OBJECT
 public:
 //    typedef std::function<void()> HOOK_FUNC;
     const static int WIDTH_MAX = 100;
@@ -23,9 +22,9 @@ public:
     const static int THICKNESS_MIN = 0;
 
 
-    explicit AbstractBrush(QObject *parent = 0);
+    explicit AbstractBrush();
     // we don't need virtual dstor, because we have no resource to delete
-    //    virtual ~AbstractBrush();
+    virtual ~AbstractBrush();
 
     virtual int width() const;
     virtual void setWidth(int width);
