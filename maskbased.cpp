@@ -13,9 +13,6 @@ void MaskBased::makeStencil(QColor color)
     if(mask_.isNull()){
         return;
     }
-    QPainter painter(&stencil_);
-    painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
-    painter.drawImage(0, 0, mask_);
 }
 
 void MaskBased::drawPointInternal(const QPoint &p, const QImage &stencil, QPainter *painter)
@@ -29,9 +26,20 @@ void MaskBased::drawPointInternal(const QPoint &p, const QImage &stencil, QPaint
         painter->begin(surface_.data());
     }
 
-    QPainter painter2(&copied_stencil);
-    painter2.setCompositionMode(QPainter::CompositionMode_DestinationIn);
-    painter2.drawImage(0, 0, mask_, p.x() % mask_.width(), p.y() % mask_.height());
+    int lineLength = copied_stencil.bytesPerLine()>>2;
+    QRgb * data = (QRgb *)copied_stencil.bits();
+    int mask_start_x = (p.x()+mask_.width()) % mask_.width();
+    int mask_start_y = (p.y()+mask_.height()) % mask_.height();
+
+    for(int y = 0; y<copied_stencil.height();++y){
+        for(int x = 0; x<lineLength;++x) {
+            int mask_x = (mask_start_x + x) % mask_.width();
+            int mask_y = (mask_start_y + y) % mask_.height();
+            if(!mask_.pixelIndex(mask_x, mask_y)) {
+                data[y*lineLength+x] = qRgba(0, 0, 0, 0);
+            }
+        }
+    }
 
     painter->drawImage(p.x(), p.y(), copied_stencil);
 
@@ -52,6 +60,7 @@ void MaskBased::setMask(const QImage &mask)
         qDebug()<<"null mask";
         return;
     }
+    mask_ = mask_.createAlphaMask();
     makeStencil(color_);
 }
 

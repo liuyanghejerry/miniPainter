@@ -89,13 +89,13 @@ void BasicBrush::drawPointInternal(const QPoint &p,
     }
 }
 
-void BasicBrush::drawPoint(const QPoint &p, qreal pr)
+void BasicBrush::drawPoint(const QPoint &p, qreal )
 {
     QPainter painter(surface_.data());
     painter.setRenderHint(QPainter::Antialiasing);
     //    QImage pressure_stencil = stencil_.scaledToWidth(stencil_.width()*pressure);
-    drawPointInternal(QPoint(p.x() - stencil_.width()/2.0,
-                             p.y() - stencil_.width()/2.0),
+    drawPointInternal(QPoint(p.x() - (stencil_.width()>>1),
+                             p.y() - (stencil_.height()>>1)),
                       stencil_,
                       &painter);
     last_point_ = p;
@@ -135,16 +135,16 @@ void BasicBrush::drawLineTo(const QPoint &end, qreal pressure)
         if ( left_ > 0.0 ) {
             offsetX += stepX * (spacing - left_);
             offsetY += stepY * (spacing - left_);
-            drawPointInternal(QPoint(start.x() + offsetX - stencil_.width()/2.0,
-                                     start.y() + offsetY - stencil_.width()/2.0),
+            drawPointInternal(QPoint(start.x() + offsetX - (stencil_.width()>>1),
+                                     start.y() + offsetY - (stencil_.height()>>1)),
                               stencil_,
                               &painter);
             left_ -= spacing;
         } else {
             offsetX += stepX * spacing;
             offsetY += stepY * spacing;
-            drawPointInternal(QPoint(start.x() + offsetX - stencil_.width()/2.0,
-                                     start.y() + offsetY - stencil_.width()/2.0),
+            drawPointInternal(QPoint(start.x() + offsetX - (stencil_.width()>>1),
+                                     start.y() + offsetY - (stencil_.height()>>1)),
                               stencil_,
                               &painter);
         }
