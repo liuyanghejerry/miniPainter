@@ -11,6 +11,7 @@ AbstractBrush::AbstractBrush():
     BF::FeatureBits bits;
     bits.set(BF::WIDTH);
     bits.set(BF::COLOR);
+    bits.set(BF::THICKNESS);
     features_ = bits;
 }
 

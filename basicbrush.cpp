@@ -14,7 +14,13 @@ BasicBrush::BasicBrush() :
     AbstractBrush(),
     left_(0)
 {
-//    makeStencil(color_);
+    typedef BrushFeature BF;
+    BF::FeatureBits bits;
+    bits.set(BF::WIDTH);
+    bits.set(BF::COLOR);
+    bits.set(BF::WATER);
+    bits.set(BF::THICKNESS);
+    features_ = bits;
 }
 
 void BasicBrush::setWidth(int width)

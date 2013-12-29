@@ -5,7 +5,6 @@
 #include <QPoint>
 #include <QImage>
 #include <QColor>
-//#include <QMultiHash>
 #include <QSharedPointer>
 #include "brushfeature.h"
 
@@ -15,7 +14,6 @@ typedef QSharedPointer<QImage> Surface;
 class AbstractBrush
 {
 public:
-//    typedef std::function<void()> HOOK_FUNC;
     const static int WIDTH_MAX = 100;
     const static int WIDTH_MIN = 0;
     const static int THICKNESS_MAX = 100;
@@ -56,7 +54,6 @@ protected:
     QPoint last_point_;
     BrushSettings settings_;
     BrushFeature features_;
-//    QMultiHash<QString, HOOK_FUNC> hooks_;
 };
 
 #endif // ABSTRACTBRUSH_H

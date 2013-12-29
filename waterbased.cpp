@@ -14,6 +14,13 @@ WaterBased::WaterBased():
     mixin_(20),
     color_remain_(255)
 {
+    typedef BrushFeature BF;
+    BF::FeatureBits bits;
+    bits.set(BF::WIDTH);
+    bits.set(BF::COLOR);
+    bits.set(BF::THICKNESS);
+    bits.set(BF::WATER);
+    features_ = bits;
 }
 int WaterBased::water() const
 {

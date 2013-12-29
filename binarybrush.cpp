@@ -7,6 +7,11 @@
 BinaryBrush::BinaryBrush() :
     BasicBrush()
 {
+    typedef BrushFeature BF;
+    BF::FeatureBits bits;
+    bits.set(BF::WIDTH);
+    bits.set(BF::COLOR);
+    features_ = bits;
 }
 
 void BinaryBrush::makeStencil(QColor color)
