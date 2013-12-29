@@ -26,7 +26,7 @@ void MaskBased::drawPointInternal(const QPoint &p, const QImage &stencil, QPaint
         painter->begin(surface_.data());
     }
 
-    int lineLength = copied_stencil.bytesPerLine()>>2;
+    int lineLength = copied_stencil.width();
     QRgb * data = (QRgb *)copied_stencil.bits();
     int mask_start_x = (p.x()+mask_.width()) % mask_.width();
     int mask_start_y = (p.y()+mask_.height()) % mask_.height();
@@ -55,12 +55,11 @@ QImage MaskBased::mask() const
 
 void MaskBased::setMask(const QImage &mask)
 {
-    mask_ = mask;
-    if(mask_.isNull()){
+    if(mask.isNull()){
         qDebug()<<"null mask";
         return;
     }
-    mask_ = mask_.createAlphaMask();
+    mask_ = mask.createAlphaMask();
     makeStencil(color_);
 }
 
