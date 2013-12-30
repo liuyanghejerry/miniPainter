@@ -2,6 +2,7 @@
 #include "waterbased.h"
 #include "maskbased.h"
 #include "binarybrush.h"
+#include "sketchbrush.h"
 #include <QPainter>
 #include <QMouseEvent>
 #include <QtCore/qmath.h>
@@ -82,8 +83,12 @@ void MiniCanvas::keyPressEvent(QKeyEvent *ev)
     case Qt::Key_F4:
         changeToBrush<BinaryBrush>();
         break;
+    case Qt::Key_F5:
+        changeToBrush<SketchBrush>();
+        break;
     case Qt::Key_D:
         result_->fill(Qt::white);
+        update();
         break;
     }
 }
@@ -94,6 +99,7 @@ void MiniCanvas::changeToBrush()
     if(std::is_base_of<AbstractBrush, BrushType>::value){
         auto ss = brush_->settings();
         auto surface = brush_->surface();
+        // NOTICE: since we're deleting base class, it needs virtual destructor!
         delete brush_;
         brush_ = new BrushType;
         brush_->setSettings(ss);

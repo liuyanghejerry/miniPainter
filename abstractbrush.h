@@ -1,7 +1,6 @@
 #ifndef ABSTRACTBRUSH_H
 #define ABSTRACTBRUSH_H
 
-#include <QObject>
 #include <QPoint>
 #include <QImage>
 #include <QColor>
@@ -21,7 +20,8 @@ public:
 
 
     explicit AbstractBrush();
-    // we don't need virtual dstor, because we have no resource to delete
+    // we need a virtual destructor, since it is deleted via base class
+    // or we'll have risk of memory leak when sub-class has its own heap data.
     virtual ~AbstractBrush();
 
     virtual int width() const;
@@ -41,9 +41,6 @@ public:
     virtual BrushSettings settings() const;
     virtual void setSettings(const BrushSettings &settings);
 
-signals:
-
-public slots:
 
 protected:
     int width_;

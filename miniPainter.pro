@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     waterbased.cpp \
     maskbased.cpp \
     binarybrush.cpp \
-    brushfeature.cpp
+    brushfeature.cpp \
+    sketchbrush.cpp
 
 HEADERS  += mainwindow.h \
     minicanvas.h \
@@ -31,6 +32,7 @@ HEADERS  += mainwindow.h \
     brushsettings.h \
     maskbased.h \
     binarybrush.h \
-    brushfeature.h
+    brushfeature.h \
+    sketchbrush.h
 
 FORMS    += mainwindow.ui
