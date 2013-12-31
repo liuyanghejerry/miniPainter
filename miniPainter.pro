@@ -36,3 +36,8 @@ HEADERS  += mainwindow.h \
     sketchbrush.h
 
 FORMS    += mainwindow.ui
+
+OTHER_FILES +=
+
+RESOURCES += \
+    assets.qrc

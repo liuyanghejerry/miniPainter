@@ -77,7 +77,7 @@ void MiniCanvas::keyPressEvent(QKeyEvent *ev)
         changeToBrush<MaskBased>();
     {
         MaskBased* m = static_cast<MaskBased*>(brush_);
-        m->setMask(QImage("canvas-print.png"));
+        m->setMask(QImage(":/mask/canvas-print.png"));
     }
         break;
     case Qt::Key_F4:

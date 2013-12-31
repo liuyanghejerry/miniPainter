@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/mask">
+        <file>canvas-print.png</file>
+    </qresource>
+</RCC>
