@@ -13,10 +13,17 @@ typedef QSharedPointer<QImage> Surface;
 class AbstractBrush
 {
 public:
-    const static int WIDTH_MAX = 100;
-    const static int WIDTH_MIN = 0;
-    const static int THICKNESS_MAX = 100;
-    const static int THICKNESS_MIN = 0;
+//    const static int WIDTH_MAX = 100;
+//    const static int WIDTH_MIN = 0;
+//    const static int THICKNESS_MAX = 100;
+//    const static int THICKNESS_MIN = 0;
+
+    enum: int {
+        WIDTH_MAX = 100,
+        WIDTH_MIN = 0,
+        THICKNESS_MAX = 100,
+        THICKNESS_MIN = 0
+    };
 
 
     explicit AbstractBrush();

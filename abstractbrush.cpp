@@ -27,7 +27,7 @@ int AbstractBrush::width() const
 
 void AbstractBrush::setWidth(int width)
 {
-    width_ = qBound(WIDTH_MIN, width, WIDTH_MAX);
+    width_ = qBound((int)WIDTH_MIN, width, (int)WIDTH_MAX);
     settings_.insert("width", width_);
 }
 int AbstractBrush::thickness() const
@@ -37,7 +37,7 @@ int AbstractBrush::thickness() const
 
 void AbstractBrush::setThickness(int thickness)
 {
-    thickness_ = qBound(THICKNESS_MIN, thickness, THICKNESS_MAX);
+    thickness_ = qBound((int)THICKNESS_MIN, thickness, (int)THICKNESS_MAX);
     settings_.insert("thickness", thickness_);
 }
 

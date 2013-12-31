@@ -29,7 +29,7 @@ int WaterBased::water() const
 
 void WaterBased::setWater(int water)
 {
-    water_ = qBound(WATER_MIN, water, WATER_MAX);
+    water_ = qBound((int)WATER_MIN, water, (int)WATER_MAX);
 }
 int WaterBased::extend() const
 {
@@ -38,7 +38,7 @@ int WaterBased::extend() const
 
 void WaterBased::setExtend(int extend)
 {
-    extend_ = qBound(EXTEND_MIN, extend, EXTEND_MAX);
+    extend_ = qBound((int)EXTEND_MIN, extend, (int)EXTEND_MAX);
 }
 int WaterBased::mixin() const
 {
@@ -47,7 +47,7 @@ int WaterBased::mixin() const
 
 void WaterBased::setMixin(int mixin)
 {
-    mixin_ = qBound(MIXIN_MIN, mixin, MIXIN_MAX);
+    mixin_ = qBound((int)MIXIN_MIN, mixin, (int)MIXIN_MAX);
 }
 
 // non-reentrant.

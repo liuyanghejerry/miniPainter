@@ -11,10 +11,11 @@ public:
         COLOR,
         THICKNESS,
         WATER,
-        MASK
+        MASK,
+        COUNT
     };
 
-    static const int FEATURE_COUNT = (size_t)FEATURE::MASK +1;
+    static constexpr int FEATURE_COUNT = MASK+1;
 
     typedef std::bitset<FEATURE_COUNT> FeatureBits;
 
