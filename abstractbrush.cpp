@@ -20,6 +20,36 @@ AbstractBrush::~AbstractBrush()
     //
 }
 
+QString AbstractBrush::name()
+{
+    return name_;
+}
+
+QString AbstractBrush::displayName()
+{
+    return displayName_;
+}
+
+QIcon AbstractBrush::icon()
+{
+    return icon_;
+}
+
+QCursor AbstractBrush::cursor()
+{
+    return cursor_;
+}
+
+QKeySequence AbstractBrush::shortcut()
+{
+    return shortcut_;
+}
+
+void AbstractBrush::setShortcut(QKeySequence key)
+{
+    shortcut_ = key;
+}
+
 int AbstractBrush::width() const
 {
     return width_;

@@ -3,6 +3,9 @@
 
 #include <QPoint>
 #include <QImage>
+#include <QIcon>
+#include <QCursor>
+#include <QKeySequence>
 #include <QColor>
 #include <QSharedPointer>
 #include "brushfeature.h"
@@ -13,11 +16,6 @@ typedef QSharedPointer<QImage> Surface;
 class AbstractBrush
 {
 public:
-//    const static int WIDTH_MAX = 100;
-//    const static int WIDTH_MIN = 0;
-//    const static int THICKNESS_MAX = 100;
-//    const static int THICKNESS_MIN = 0;
-
     enum: int {
         WIDTH_MAX = 100,
         WIDTH_MIN = 0,
@@ -30,6 +28,13 @@ public:
     // we need a virtual destructor, since it is deleted via base class
     // or we'll have risk of memory leak when sub-class has its own heap data.
     virtual ~AbstractBrush();
+
+    virtual QString name();
+    virtual QString displayName();
+    virtual QIcon icon();
+    virtual QCursor cursor();
+    virtual QKeySequence shortcut();
+    virtual void setShortcut(QKeySequence key);
 
     virtual int width() const;
     virtual void setWidth(int width);
@@ -58,6 +63,12 @@ protected:
     QPoint last_point_;
     BrushSettings settings_;
     BrushFeature features_;
+
+    QString name_;
+    QString displayName_;
+    QIcon icon_;
+    QCursor cursor_;
+    QKeySequence shortcut_;
 };
 
 #endif // ABSTRACTBRUSH_H

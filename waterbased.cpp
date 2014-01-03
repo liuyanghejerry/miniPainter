@@ -21,6 +21,9 @@ WaterBased::WaterBased():
     bits.set(BF::THICKNESS);
     bits.set(BF::WATER);
     features_ = bits;
+
+    name_ = tr("WaterBrush");
+    displayName_ = name_;
 }
 int WaterBased::water() const
 {
