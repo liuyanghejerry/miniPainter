@@ -11,8 +11,9 @@ public:
         COLOR,
         THICKNESS,
         WATER,
-        MASK,
-        COUNT
+        EXTEND,
+        MIXIN,
+        MASK
     };
 
     static constexpr int FEATURE_COUNT = MASK+1;

@@ -12,7 +12,6 @@ public:
     void setColor(const QColor& c) Q_DECL_OVERRIDE;
     void drawPoint(const QPoint& p, qreal pressure=1) Q_DECL_OVERRIDE;
     void drawLineTo(const QPoint& end, qreal pressure=1) Q_DECL_OVERRIDE;
-    void setSettings(const BrushSettings &settings) Q_DECL_OVERRIDE;
 protected:
     void preparePen();
     QPen sketchPen;

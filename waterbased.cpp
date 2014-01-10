@@ -5,6 +5,7 @@
 #include <QPen>
 #include <QBrush>
 #include <QBitmap>
+#include <QObject>
 #include <QDebug>
 
 WaterBased::WaterBased():
@@ -20,10 +21,13 @@ WaterBased::WaterBased():
     bits.set(BF::COLOR);
     bits.set(BF::THICKNESS);
     bits.set(BF::WATER);
+    bits.set(BF::EXTEND);
+    bits.set(BF::MIXIN);
     features_ = bits;
 
-    name_ = tr("WaterBrush");
+    name_ = QObject::tr("WaterBrush");
     displayName_ = name_;
+    shortcut_ = Qt::Key_3;
 }
 int WaterBased::water() const
 {

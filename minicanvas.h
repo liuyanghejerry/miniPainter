@@ -21,6 +21,7 @@ protected:
     QSize pre_size_;
     Surface result_;
     bool mouse_press_;
+    bool tablet_press_;
     AbstractBrush *brush_;
 
     template<typename BrushType>

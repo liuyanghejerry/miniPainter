@@ -12,6 +12,10 @@ BinaryBrush::BinaryBrush() :
     bits.set(BF::WIDTH);
     bits.set(BF::COLOR);
     features_ = bits;
+
+    name_ = QObject::tr("BinaryBrush");
+    displayName_ = name_;
+    shortcut_ = Qt::Key_2;
 }
 
 void BinaryBrush::makeStencil(QColor color)

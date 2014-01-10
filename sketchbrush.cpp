@@ -4,6 +4,16 @@
 
 SketchBrush::SketchBrush()
 {
+    typedef BrushFeature BF;
+    BF::FeatureBits bits;
+    bits.set(BF::WIDTH);
+    bits.set(BF::THICKNESS);
+    bits.set(BF::COLOR);
+    features_ = bits;
+
+    name_ = QObject::tr("SketchBrush");
+    displayName_ = name_;
+    shortcut_ = Qt::Key_4;
 }
 
 void SketchBrush::setColor(const QColor &c)
@@ -29,11 +39,6 @@ void SketchBrush::drawLineTo(const QPoint &end, qreal pressure)
     points.push_back(end);
     sketch();
     last_point_ = end;
-}
-
-void SketchBrush::setSettings(const BrushSettings &settings)
-{
-
 }
 
 void SketchBrush::preparePen()

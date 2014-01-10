@@ -3,6 +3,7 @@
 #include "maskbased.h"
 #include "binarybrush.h"
 #include "sketchbrush.h"
+#include "basiceraser.h"
 #include <QPainter>
 #include <QMouseEvent>
 #include <QtCore/qmath.h>
@@ -12,7 +13,8 @@ MiniCanvas::MiniCanvas(QWidget *parent) :
     QWidget(parent),
     pre_size_(1280, 480),
     result_(new QImage(pre_size_, QImage::Format_ARGB32_Premultiplied)),
-    mouse_press_(false)
+    mouse_press_(false),
+    tablet_press_(false)
 {
     setFocusPolicy(Qt::StrongFocus);
     result_->fill(Qt::white);
@@ -49,6 +51,7 @@ void MiniCanvas::mousePressEvent(QMouseEvent *ev)
 void MiniCanvas::mouseMoveEvent(QMouseEvent *ev)
 {
     if(mouse_press_){
+        qDebug()<<"mouse event";
         brush_->drawLineTo(ev->pos());
         update();
     }
@@ -59,9 +62,32 @@ void MiniCanvas::mouseReleaseEvent(QMouseEvent *)
     mouse_press_ = false;
 }
 
-void MiniCanvas::tabletEvent(QTabletEvent *)
+void MiniCanvas::tabletEvent(QTabletEvent *ev)
 {
-    //
+    //TODO: fully support tablet
+    qreal pressure = ev->pressure();
+    QPoint pos = ev->pos();
+    qDebug()<<"pressure:"<<pressure<<"at"<<pos;
+    switch(ev->type()){
+    case QEvent::TabletPress:
+        brush_->drawPoint(ev->pos(), ev->pressure());
+        tablet_press_ = true;
+        update();
+        break;
+    case QEvent::TabletMove:
+        if(tablet_press_){
+            brush_->drawLineTo(ev->pos(), ev->pressure());
+            update();
+        }
+        break;
+    case QEvent::TabletRelease:
+        tablet_press_ = false;
+//        updateCursor();
+        break;
+    default:
+        break;
+    }
+    ev->accept();
 }
 
 void MiniCanvas::keyPressEvent(QKeyEvent *ev)
@@ -85,6 +111,9 @@ void MiniCanvas::keyPressEvent(QKeyEvent *ev)
         break;
     case Qt::Key_F5:
         changeToBrush<SketchBrush>();
+        break;
+    case Qt::Key_F6:
+        changeToBrush<BasicEraser>();
         break;
     case Qt::Key_D:
         result_->fill(Qt::white);

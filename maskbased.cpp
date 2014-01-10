@@ -11,6 +11,10 @@ MaskBased::MaskBased() :
     bits.set(BF::COLOR);
     bits.set(BF::THICKNESS);
     features_ = bits;
+
+    name_ = QObject::tr("Crayon");
+    displayName_ = name_;
+    shortcut_ = Qt::Key_5;
 }
 
 void MaskBased::makeStencil(QColor color)

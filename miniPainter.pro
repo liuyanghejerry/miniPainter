@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     maskbased.cpp \
     binarybrush.cpp \
     brushfeature.cpp \
-    sketchbrush.cpp
+    sketchbrush.cpp \
+    basiceraser.cpp
 
 HEADERS  += mainwindow.h \
     minicanvas.h \
@@ -33,11 +34,10 @@ HEADERS  += mainwindow.h \
     maskbased.h \
     binarybrush.h \
     brushfeature.h \
-    sketchbrush.h
+    sketchbrush.h \
+    basiceraser.h
 
 FORMS    += mainwindow.ui
-
-OTHER_FILES +=
 
 RESOURCES += \
     assets.qrc

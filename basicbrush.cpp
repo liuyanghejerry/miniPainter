@@ -21,6 +21,10 @@ BasicBrush::BasicBrush() :
     bits.set(BF::WATER);
     bits.set(BF::THICKNESS);
     features_ = bits;
+
+    name_ = QObject::tr("BasicBrush");
+    displayName_ = name_;
+    shortcut_ = Qt::Key_1;
 }
 
 void BasicBrush::setWidth(int width)
@@ -95,20 +99,22 @@ void BasicBrush::drawPointInternal(const QPoint &p,
     }
 }
 
-void BasicBrush::drawPoint(const QPoint &p, qreal )
+void BasicBrush::drawPoint(const QPoint &p, qreal pr)
 {
+    qDebug()<<pr;
     QPainter painter(surface_.data());
     painter.setRenderHint(QPainter::Antialiasing);
-    //    QImage pressure_stencil = stencil_.scaledToWidth(stencil_.width()*pressure);
-    drawPointInternal(QPoint(p.x() - (stencil_.width()>>1),
-                             p.y() - (stencil_.height()>>1)),
-                      stencil_,
+    QImage pressure_stencil = stencil_.scaledToWidth(stencil_.width()*pr);
+    drawPointInternal(QPoint(p.x() - (pressure_stencil.width()>>1),
+                             p.y() - (pressure_stencil.height()>>1)),
+                      pressure_stencil,
                       &painter);
     last_point_ = p;
 }
 
 void BasicBrush::drawLineTo(const QPoint &end, qreal pressure)
 {
+    qDebug()<<pressure;
     if(end.x() > surface_->width() || end.x() < 0
             || end.y() > surface_->height() || end.y() < 0) {
         return;
@@ -133,7 +139,7 @@ void BasicBrush::drawLineTo(const QPoint &end, qreal pressure)
 
     qreal totalDistance = left_ + distance;
     // TODO
-    //    QImage pressure_stencil = stencil_.scaledToWidth(stencil_.width()*pressure);
+    QImage pressure_stencil = stencil_.scaledToWidth(stencil_.width()*pressure);
 
     QPainter painter(surface_.data());
     painter.setRenderHint(QPainter::Antialiasing);
@@ -141,17 +147,17 @@ void BasicBrush::drawLineTo(const QPoint &end, qreal pressure)
         if ( left_ > 0.0 ) {
             offsetX += stepX * (spacing - left_);
             offsetY += stepY * (spacing - left_);
-            drawPointInternal(QPoint(start.x() + offsetX - (stencil_.width()>>1),
-                                     start.y() + offsetY - (stencil_.height()>>1)),
-                              stencil_,
+            drawPointInternal(QPoint(start.x() + offsetX - (pressure_stencil.width()>>1),
+                                     start.y() + offsetY - (pressure_stencil.height()>>1)),
+                              pressure_stencil,
                               &painter);
             left_ -= spacing;
         } else {
             offsetX += stepX * spacing;
             offsetY += stepY * spacing;
-            drawPointInternal(QPoint(start.x() + offsetX - (stencil_.width()>>1),
-                                     start.y() + offsetY - (stencil_.height()>>1)),
-                              stencil_,
+            drawPointInternal(QPoint(start.x() + offsetX - (pressure_stencil.width()>>1),
+                                     start.y() + offsetY - (pressure_stencil.height()>>1)),
+                              pressure_stencil,
                               &painter);
         }
         totalDistance -= spacing;
