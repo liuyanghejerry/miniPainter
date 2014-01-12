@@ -12,12 +12,14 @@
 
 BasicBrush::BasicBrush() :
     AbstractBrush(),
-    left_(0)
+    left_(0),
+    hardness_(HARDNESS_MAX)
 {
     typedef BrushFeature BF;
     BF::FeatureBits bits;
     bits.set(BF::WIDTH);
     bits.set(BF::COLOR);
+    bits.set(BF::HARDNESS);
     bits.set(BF::WATER);
     bits.set(BF::THICKNESS);
     features_ = bits;
@@ -61,7 +63,7 @@ void BasicBrush::makeStencil(QColor color)
         return;
     }
     QRadialGradient gradient(center, half_width);
-    const qreal thk = thickness_/500.0;
+    const qreal thk = hardness_/500.0;
     for(int i=0;i<100;++i){
         const qreal value = i/100.0;
 //        qreal thk = 0.03;
@@ -70,12 +72,13 @@ void BasicBrush::makeStencil(QColor color)
     }
     gradient.setColorAt(1, Qt::transparent);
     gradient.setCenterRadius(half_width);
-    const qreal r_h = thickness_*0.007; // make it soft to fake an Anti-aliasing effect
+    const qreal r_h = hardness_*0.01; // make it soft to fake an Anti-aliasing effect
 //    qreal r_h = 0.8;
     gradient.setFocalRadius(half_width*r_h -1);
     const QBrush brush(gradient);
     const QPen pen(brush, width_);
     painter.setPen(pen);
+    painter.setOpacity(thickness_/100.0);
     painter.drawPoint(half_width, half_width);
     painter.end();
 }
@@ -165,3 +168,14 @@ void BasicBrush::drawLineTo(const QPoint &end, qreal pressure)
     left_ = totalDistance;
     last_point_ = end;
 }
+int BasicBrush::hardness() const
+{
+    return hardness_;
+}
+
+void BasicBrush::setHardness(int hardness)
+{
+    hardness_ = qBound((int)HARDNESS_MIN, hardness, (int)HARDNESS_MAX);
+    settings_.insert("hardness", hardness_);
+}
+
